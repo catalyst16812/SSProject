@@ -1,9 +1,12 @@
 package com.catalyst.funds.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class UserEntity {
@@ -17,9 +20,14 @@ public class UserEntity {
 	private String email;
 	
 	private Long phoneNo;
+	
+	
+	@ManyToMany
+	private Set<TeamsEntity> teamEntities;
 
 
-  public Integer getUserId() {
+
+public Integer getUserId() {
     return userId;
   }
 
@@ -50,4 +58,13 @@ public class UserEntity {
   public void setPhoneNo(Long phoneNo) {
 	this.phoneNo = phoneNo;
   }
+
+  public Set<TeamsEntity> getTeamEntities() {
+		return teamEntities;
+	}
+
+	public void setTeamEntities(Set<TeamsEntity> teamEntities) {
+		this.teamEntities = teamEntities;
+	}
+
 }
