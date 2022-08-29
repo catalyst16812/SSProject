@@ -22,7 +22,7 @@ public class UserEntity {
 	private Long phoneNo;
 	
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "userEntities")
 	private Set<TeamsEntity> teamEntities;
 
 

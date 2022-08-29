@@ -1,5 +1,8 @@
 package com.catalyst.funds.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +51,11 @@ private TeamsRepositry teamVar;
 		tent.setTeamName(T.getTeamName());
 		tent.setFundGoal(T.getFundGoal());
 		tent.setCycle(T.getCycle());
-
+		Set<UserEntity> userEntities = new HashSet<>();
+		UserEntity entity = userVar.findByUserName(T.getUsername());
+		userEntities.add(entity);
+		tent.setUserEntities(userEntities);
+		
 		teamVar.save(tent);
 		return T.toString();
 	}
