@@ -77,6 +77,7 @@ private PaymentRepositry payVar;
 		
 		Set<TeamsEntity> teamsEntities = new HashSet<>();
 		TeamsEntity entity = teamVar.findByTeamName(P.getTeamId());
+		//entity.getUserEntities().add(null)
 		teamsEntities.add(entity);
 		pay.setTeamsEntities(teamsEntities);
 		
@@ -89,6 +90,5 @@ private PaymentRepositry payVar;
 		return P.toString();
 		
 	}
-	
 
 }

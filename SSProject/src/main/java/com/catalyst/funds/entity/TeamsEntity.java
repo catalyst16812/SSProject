@@ -27,8 +27,19 @@ public class TeamsEntity {
 	@JoinTable(name="TeamWithUser",joinColumns = @JoinColumn(name = "team_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
 	private Set<UserEntity> userEntities;
 	
+	
 	@ManyToMany(mappedBy = "teamsEntities")
 	private Set<PaymentEntity> paymentEntities;
+
+
+public Set<PaymentEntity> getPaymentEntities() {
+		return paymentEntities;
+	}
+
+	public void setPaymentEntities(Set<PaymentEntity> paymentEntities) {
+		this.paymentEntities = paymentEntities;
+	}
+
 	
   public Integer getTeamId() {
     return teamId;

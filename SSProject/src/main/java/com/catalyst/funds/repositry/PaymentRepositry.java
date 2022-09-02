@@ -6,6 +6,4 @@ import com.catalyst.funds.entity.PaymentEntity;
 
 public interface PaymentRepositry extends CrudRepository<PaymentEntity, Integer> {
 	
-	PaymentEntity findByPaymentId(String paymentId);
-
 }

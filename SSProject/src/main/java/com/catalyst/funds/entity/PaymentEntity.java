@@ -2,6 +2,7 @@ package com.catalyst.funds.entity;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
+@Entity
 public class PaymentEntity {
 
 	@Id
@@ -49,6 +51,7 @@ public class PaymentEntity {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
+	
 	public Set<TeamsEntity> getTeamsEntities() {
 		return teamsEntities;
 	}
