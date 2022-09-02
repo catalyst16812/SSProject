@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
@@ -27,6 +26,9 @@ public class TeamsEntity {
 	@ManyToMany
 	@JoinTable(name="TeamWithUser",joinColumns = @JoinColumn(name = "team_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
 	private Set<UserEntity> userEntities;
+	
+	@ManyToMany(mappedBy = "teamsEntities")
+	private Set<PaymentEntity> paymentEntities;
 	
   public Integer getTeamId() {
     return teamId;

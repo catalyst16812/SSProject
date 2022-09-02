@@ -6,7 +6,7 @@ public class Teams {
 	private String teamName;
 	private long fundGoal;
 	private String cycle;
-	private String username;
+	private String userName;
 	public int getTeamId() {
 		return teamId;
 	}
@@ -31,16 +31,16 @@ public class Teams {
 	public void setCycle(String cycle) {
 		this.cycle = cycle;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	@Override
 	public String toString() {
 		return "Teams [teamId=" + teamId + ", teamName=" + teamName + ", fundGoal=" + fundGoal + ", cycle=" + cycle
-				+ ", username=" + username + "]";
+				+ ", userName=" + userName + "]";
 	}
 
 	

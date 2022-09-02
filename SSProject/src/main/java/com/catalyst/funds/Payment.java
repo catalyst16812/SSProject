@@ -2,28 +2,23 @@ package com.catalyst.funds;
 
 public class Payment {
 	
-	private int userId;
+	private int paymentId;
 	private String date;
-	private int teamId;
 	private String txnId;
 	private long amount;
-	public int getUserId() {
-		return userId;
+	private String userName;
+	private String teamId;
+	public int getPaymentId() {
+		return paymentId;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
 	}
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public int getTeamId() {
-		return teamId;
-	}
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
 	}
 	public String getTxnId() {
 		return txnId;
@@ -37,10 +32,24 @@ public class Payment {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
 	@Override
 	public String toString() {
-		return "Payment [userId=" + userId + ", date=" + date + ", teamId=" + teamId + ", txnId=" + txnId + ", amount="
-				+ amount + "]";
+		return "Payment [paymentId=" + paymentId + ", date=" + date + ", txnId=" + txnId + ", amount=" + amount
+				+ ", userName=" + userName + ", teamId=" + teamId + "]";
 	}
+	
 
+	
 }

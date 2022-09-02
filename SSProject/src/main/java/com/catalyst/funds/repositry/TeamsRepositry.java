@@ -7,5 +7,7 @@ import com.catalyst.funds.entity.TeamsEntity;
 
 public interface TeamsRepositry extends CrudRepository<TeamsEntity, Integer> {
 	
+	TeamsEntity findByTeamName(String teamName);
+	
 }
 

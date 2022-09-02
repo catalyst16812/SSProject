@@ -25,7 +25,8 @@ public class UserEntity {
 	@ManyToMany(mappedBy = "userEntities")
 	private Set<TeamsEntity> teamEntities;
 
-
+	@ManyToMany(mappedBy = "userEntities")
+	private Set<PaymentEntity> paymentEntity;
 
 public Integer getUserId() {
     return userId;
@@ -65,6 +66,14 @@ public Integer getUserId() {
 
 	public void setTeamEntities(Set<TeamsEntity> teamEntities) {
 		this.teamEntities = teamEntities;
+	}
+
+	public Set<PaymentEntity> getPaymentEntity() {
+		return paymentEntity;
+	}
+
+	public void setPaymentEntity(Set<PaymentEntity> paymentEntity) {
+		this.paymentEntity = paymentEntity;
 	}
 
 }
