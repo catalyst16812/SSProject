@@ -1,14 +1,17 @@
 package com.catalyst.funds.controller;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.catalyst.funds.Payment;
@@ -38,6 +41,7 @@ private PaymentRepositry payVar;
 		return "This is page 1"+var1;
 		
 	}
+	
 	@PostMapping (path="/userdata")
 	public String alt(@RequestBody User U) {
 		System.out.println(U);
@@ -91,4 +95,48 @@ private PaymentRepositry payVar;
 		
 	}
 
+	@PutMapping (path="/teamsdata")
+	public String update(@RequestBody Teams T) {
+		System.out.println(T);
+		
+		UserEntity userOption = userVar.findByUserName(T.getUserName());
+		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamName());
+		
+		teamsOption.getUserEntities().add(userOption);
+		
+		teamVar.save(teamsOption);
+		
+		
+		return T.toString();
+		
+    }
+
+	@DeleteMapping(path="/teamsdata")
+	public String deleteUserFromTeam(@RequestBody Teams T)
+	{
+		System.out.println(T);
+		
+		UserEntity userOption = userVar.findByUserName(T.getUserName());
+		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamName());
+		
+		teamsOption.getUserEntities().remove(userOption);
+		
+		teamVar.save(teamsOption);
+		return null;
+		
+	}
+	
+	@DeleteMapping(path="/teamsdelete/{id}")
+	public String deleteTeam(@PathVariable Integer id)
+	{
+	
+		Optional<TeamsEntity> teamsOption = teamVar.findById(id);
+		if(teamsOption.isPresent()) {
+			teamVar.delete(teamsOption.get());
+		}
+		
+		return null;
+		
+	}
+	
 }
