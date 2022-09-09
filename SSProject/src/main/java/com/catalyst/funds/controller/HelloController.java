@@ -1,6 +1,9 @@
 package com.catalyst.funds.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.catalyst.funds.Payment;
 import com.catalyst.funds.Teams;
@@ -24,7 +28,7 @@ import com.catalyst.funds.repositry.PaymentRepositry;
 import com.catalyst.funds.repositry.TeamsRepositry;
 import com.catalyst.funds.repositry.UserRepositry;
 
-@Controller
+@RestController
 public class HelloController {
 @Autowired
 private UserRepositry userVar;
@@ -34,16 +38,25 @@ private TeamsRepositry teamVar;
 private PaymentRepositry payVar;
 
 
-	@GetMapping("/page1/{var1}")
-	public String index(@PathVariable String var1) {
+	@GetMapping("/page1")
+	public List<User> index() {
 		Iterable<UserEntity> users = userVar.findAll();
 		System.out.println(users);
-		return "This is page 1"+var1;
+		List<User> userlist = new ArrayList<>();
+		
+		for (UserEntity userEntity : users) {
+			User u = new User();
+			u.setUserName(userEntity.getUserName());
+			u.setUserId(userEntity.getUserId());
+			
+			userlist.add(u);
+		}
+		return userlist;
 		
 	}
 	
 	@PostMapping (path="/userdata")
-	public String alt(@RequestBody User U) {
+	public User alt(@RequestBody User U) {
 		System.out.println(U);
 		UserEntity entity = new UserEntity();
 		//entity.setUserId(U.getUserId());
@@ -52,7 +65,7 @@ private PaymentRepositry payVar;
 		entity.setPhoneNo(U.getPhoneNo());
 
 		userVar.save(entity);
-		return U.toString();
+		return U;
 	}
 	@PostMapping (path="/teamsdata")
 	public String alt(@RequestBody Teams T) {
@@ -139,4 +152,16 @@ private PaymentRepositry payVar;
 		
 	}
 	
+	@DeleteMapping(path="/deletetxn/{id}")
+	public String deleteTxn(@PathVariable Integer id)
+	{
+	
+		Optional<PaymentEntity> payment = payVar.findById(id);
+		if(payment.isPresent()) {
+			payVar.delete(payment.get());
+		}
+		
+		return null;
+		
+	}
 }
