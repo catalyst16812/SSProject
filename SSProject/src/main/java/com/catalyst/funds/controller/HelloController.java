@@ -70,11 +70,11 @@ private PaymentRepositry payVar;
 			t.setTeamName(teamEntity.getTeamName());
 			t.setFundGoal(teamEntity.getFundGoal());
 			t.setCycle(teamEntity.getCycle());
-			List<User> users = new ArrayList<>();
-			t.setUsers(users );
-			User user = new User();
-			users.add(user );
-			user.setUserName("anudip");
+//			List<User> users = new ArrayList<>();
+//			t.setUsers(users );
+//			User user = new User();
+//			users.add(user );
+//			user.setUserName("anudip");
 			
 			teamlist.add(t);
 		}
