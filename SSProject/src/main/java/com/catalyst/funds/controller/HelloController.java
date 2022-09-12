@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catalyst.funds.Payment;
+import com.catalyst.funds.TeamWithUser;
 import com.catalyst.funds.Teams;
 import com.catalyst.funds.User;
 import com.catalyst.funds.entity.TeamsEntity;
@@ -38,7 +39,7 @@ private TeamsRepositry teamVar;
 private PaymentRepositry payVar;
 
 
-	@GetMapping("/page1")
+	@GetMapping("/userinfo")
 	public List<User> index() {
 		Iterable<UserEntity> users = userVar.findAll();
 		System.out.println(users);
@@ -48,10 +49,36 @@ private PaymentRepositry payVar;
 			User u = new User();
 			u.setUserName(userEntity.getUserName());
 			u.setUserId(userEntity.getUserId());
+			u.setPhoneNo(userEntity.getPhoneNo());
+			u.setEmail(userEntity.getEmail());
 			
 			userlist.add(u);
 		}
 		return userlist;
+		
+	}
+	
+	@GetMapping("/teaminfo")
+	public List<Teams> info() {
+		Iterable<TeamsEntity> team = teamVar.findAll();
+		System.out.println(team);
+		List<Teams> teamlist = new ArrayList<>();
+		
+		for (TeamsEntity teamEntity : team) {
+			Teams t = new Teams();
+			t.setTeamId(teamEntity.getTeamId());
+			t.setTeamName(teamEntity.getTeamName());
+			t.setFundGoal(teamEntity.getFundGoal());
+			t.setCycle(teamEntity.getCycle());
+			List<User> users = new ArrayList<>();
+			t.setUsers(users );
+			User user = new User();
+			users.add(user );
+			user.setUserName("anudip");
+			
+			teamlist.add(t);
+		}
+		return teamlist;
 		
 	}
 	
@@ -75,10 +102,6 @@ private PaymentRepositry payVar;
 		tent.setTeamName(T.getTeamName());
 		tent.setFundGoal(T.getFundGoal());
 		tent.setCycle(T.getCycle());
-		Set<UserEntity> userEntities = new HashSet<>();
-		UserEntity entity = userVar.findByUserName(T.getUserName());
-		userEntities.add(entity);
-		tent.setUserEntities(userEntities);
 		
 		teamVar.save(tent);
 		return T.toString();
@@ -109,28 +132,25 @@ private PaymentRepositry payVar;
 	}
 
 	@PutMapping (path="/teamsdata")
-	public String update(@RequestBody Teams T) {
+	public String update(@RequestBody TeamWithUser T) {
 		System.out.println(T);
-		
-		UserEntity userOption = userVar.findByUserName(T.getUserName());
-		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamName());
-		
-		teamsOption.getUserEntities().add(userOption);
+		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamname());
+	
+			UserEntity userOption = userVar.findByUserName(T.getUsername());
+			teamsOption.getUserEntities().add(userOption);
 		
 		teamVar.save(teamsOption);
-		
-		
 		return T.toString();
 		
     }
 
 	@DeleteMapping(path="/teamsdata")
-	public String deleteUserFromTeam(@RequestBody Teams T)
+	public String deleteUserFromTeam(@RequestBody TeamWithUser T)
 	{
 		System.out.println(T);
 		
-		UserEntity userOption = userVar.findByUserName(T.getUserName());
-		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamName());
+		UserEntity userOption = userVar.findByUserName(T.getUsername());
+		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamname());
 		
 		teamsOption.getUserEntities().remove(userOption);
 		

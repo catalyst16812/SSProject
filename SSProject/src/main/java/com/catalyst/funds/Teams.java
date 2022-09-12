@@ -1,12 +1,21 @@
 package com.catalyst.funds;
 
+import java.util.List;
+
 public class Teams {
 
 	private int teamId;
 	private String teamName;
 	private long fundGoal;
 	private String cycle;
-	private String userName;
+	private List<User> users ;
+	
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	public int getTeamId() {
 		return teamId;
 	}
@@ -31,17 +40,13 @@ public class Teams {
 	public void setCycle(String cycle) {
 		this.cycle = cycle;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	@Override
 	public String toString() {
 		return "Teams [teamId=" + teamId + ", teamName=" + teamName + ", fundGoal=" + fundGoal + ", cycle=" + cycle
-				+ ", userName=" + userName + "]";
+				+ ", users=" + users + "]";
 	}
+	
+	
 
 	
 	
