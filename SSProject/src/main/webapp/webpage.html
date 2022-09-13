@@ -7,36 +7,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src= "https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<body >
+    <style>
+        table, th, td,tr {
+           border: 1px solid black;
+           border-width: thin;
+        }
+     </style>
+
+    <body >
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
-<!-- CSS only -->
-<style>
-    table, th, td {
-      border: 1px solid;
-    }
-    </style>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 <div id = "teamtab">
-<table id = "table">
 
-    <thead>
-        <tr>
-            <th>Team Id</th>
-            <th>Team Name</th>
-            <th>Fund Goal</th>
-            <th>Cycle</th>
-            <th>Users</th>
-        </tr>
-    </thead>
-</table>
 </div>
 <div id="demo">
-  <h2>Let AJAX change this text</h2>
-  <button type="button" onclick="loadDoc()">Change Content</button>
+
+  <h2>Click to Show teams</h2> 
+  <button type="button" onclick="loadDoc()">Click Here</button>&emsp;
+  &emsp; <h2>Click to show users</h2>
+  <button type="button" onclick="loaduser()">Click Here</button>
 </div>
 
 </body>
