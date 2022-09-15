@@ -28,7 +28,7 @@ public class TeamsEntity {
 	private Set<UserEntity> userEntities;
 	
 	
-	@ManyToMany(mappedBy = "teamsEntities")
+	@ManyToMany(mappedBy = "teamsEntitiy")
 	private Set<PaymentEntity> paymentEntities;
 
 

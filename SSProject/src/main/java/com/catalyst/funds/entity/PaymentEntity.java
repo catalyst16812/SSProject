@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PaymentEntity {
@@ -20,12 +21,17 @@ public class PaymentEntity {
 	private String txnId;
 	private long amount;
 	
-	@ManyToMany
-	@JoinTable(name="UserPayments", joinColumns = @JoinColumn(name ="payment_id"), inverseJoinColumns = @JoinColumn(name="team_id"))
-	private Set<TeamsEntity> teamsEntities;
-	@ManyToMany
-	@JoinTable(name="UserPayments", joinColumns = @JoinColumn(name ="payment_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
-	private Set<UserEntity> userEntities;
+	//@ManyToMany
+//	@JoinTable(name="UserPayments", joinColumns = @JoinColumn(name ="payment_id"), inverseJoinColumns = @JoinColumn(name="team_id"))
+	
+	@ManyToOne
+	@JoinColumn(name="team_id")
+    private TeamsEntity teamsEntitiy;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+//	@JoinTable(name="UserPayments", joinColumns = @JoinColumn(name ="payment_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	private UserEntity userEntity;
 	
 	public int getPaymentId() {
 		return paymentId;
@@ -51,19 +57,20 @@ public class PaymentEntity {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
+	public TeamsEntity getTeamsEntitiy() {
+		return teamsEntitiy;
+	}
+	public void setTeamsEntitiy(TeamsEntity teamsEntitiy) {
+		this.teamsEntitiy = teamsEntitiy;
+	}
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
 	
-	public Set<TeamsEntity> getTeamsEntities() {
-		return teamsEntities;
-	}
-	public void setTeamsEntities(Set<TeamsEntity> teamsEntities) {
-		this.teamsEntities = teamsEntities;
-	}
-	public Set<UserEntity> getUserEntities() {
-		return userEntities;
-	}
-	public void setUserEntities(Set<UserEntity> userEntities) {
-		this.userEntities = userEntities;
-	}
+	
 	
 	  
 	

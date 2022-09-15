@@ -107,30 +107,7 @@ private PaymentRepositry payVar;
 		return T.toString();
 	}
 	
-	@PostMapping (path="/payments")
-	public String alt(@RequestBody Payment P) {
-		System.out.println(P);
-		PaymentEntity pay = new PaymentEntity();
-		pay.setAmount(P.getAmount());
-		pay.setDate(P.getDate());
-		pay.setTxnId(P.getTxnId());
-		
-		Set<TeamsEntity> teamsEntities = new HashSet<>();
-		TeamsEntity entity = teamVar.findByTeamName(P.getTeamId());
-		//entity.getUserEntities().add(null)
-		teamsEntities.add(entity);
-		pay.setTeamsEntities(teamsEntities);
-		
-		Set<UserEntity> userEntities = new HashSet<>();
-		UserEntity entity2 = userVar.findByUserName(P.getUserName());
-		userEntities.add(entity2);
-		pay.setUserEntities(userEntities);
-		
-		payVar.save(pay);
-		return P.toString();
-		
-	}
-
+	
 	@PutMapping (path="/teamsdata")
 	public String update(@RequestBody TeamWithUser T) {
 		System.out.println(T);
