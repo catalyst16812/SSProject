@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class UserEntity {
@@ -25,7 +26,7 @@ public class UserEntity {
 	@ManyToMany(mappedBy = "userEntities")
 	private Set<TeamsEntity> teamEntities;
 	
-	@ManyToMany(mappedBy = "userEntities")
+	@OneToMany(mappedBy = "userEntity")
 	private Set<PaymentEntity> paymentEntities;
 
 
