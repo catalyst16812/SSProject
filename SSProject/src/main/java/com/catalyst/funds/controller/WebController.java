@@ -11,5 +11,8 @@ public class WebController {
 	public String index(){
 		return "webpage.html";
 	}
-
+	@RequestMapping("/adduser")
+	public String adduser() {
+		return "login.html";
+	}
 }
