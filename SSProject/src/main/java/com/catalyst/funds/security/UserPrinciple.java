@@ -1,4 +1,4 @@
-package security;
+package com.catalyst.funds.security;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class UserPrinciple implements UserDetails {
 
 	private User user;

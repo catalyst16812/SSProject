@@ -1,4 +1,4 @@
-package security;
+package com.catalyst.funds.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -19,12 +19,12 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		User user = repo.findByUsername(username);
+		UserAuth user = repo.findByUsername(username);
 		if(user==null)
 			throw new UsernameNotFoundException("User 404");
-		
-		
-		return new UserPrinciple(user);
+		return	User.withUsername(user.getUsername()).password(user.getPassword()).build();
+			
+//		 new UserPrinciple(user);
 	}
 
 }

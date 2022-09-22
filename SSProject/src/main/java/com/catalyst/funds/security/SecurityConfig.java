@@ -1,4 +1,4 @@
-package security;
+package com.catalyst.funds.security;
 
 import java.util.ArrayList;
 import java.util.List;

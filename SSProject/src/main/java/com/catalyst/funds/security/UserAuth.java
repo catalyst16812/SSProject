@@ -1,4 +1,4 @@
-package security;
+package com.catalyst.funds.security;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
