@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class TeamsEntity {
@@ -28,7 +29,7 @@ public class TeamsEntity {
 	private Set<UserEntity> userEntities;
 	
 	
-	@ManyToMany(mappedBy = "teamsEntitiy")
+	@OneToMany(mappedBy = "teamsEntitiy")
 	private Set<PaymentEntity> paymentEntities;
 
 
