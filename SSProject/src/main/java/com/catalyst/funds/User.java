@@ -6,6 +6,14 @@ public class User {
 	private long phoneNo ;
 	private String email ;
 	private int userId;
+	private String password;
+	private String role;
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -15,7 +23,7 @@ public class User {
 	public long getPhoneNo() {
 		return phoneNo;
 	}
-	public void setPhoneNo(Long phoneNo) {
+	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 	public String getEmail() {
@@ -27,13 +35,20 @@ public class User {
 	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", phoneNo=" + phoneNo + ", email=" + email + ", userId=" + userId + "]";
+		return "User [userName=" + userName + ", phoneNo=" + phoneNo + ", email=" + email + ", userId=" + userId
+				+ ", password=" + password + ", role=" + role + "]";
 	}
-	
+
 	
 }

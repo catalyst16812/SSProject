@@ -10,9 +10,10 @@ public class WebController {
 	@RequestMapping("/")
 	public String index(){
 		return "webpage.html";
-	}
-	@RequestMapping("/adduser")
-	public String adduser() {
-		return "login.html";
-	}
+}
+//	@RequestMapping("/login")
+//	public String adduser() {
+//		return "login.html";
+//	}
+	
 }

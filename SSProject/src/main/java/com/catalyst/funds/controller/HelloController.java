@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.catalyst.funds.entity.PaymentEntity;
 import com.catalyst.funds.repositry.PaymentRepositry;
 import com.catalyst.funds.repositry.TeamsRepositry;
 import com.catalyst.funds.repositry.UserRepositry;
+import com.catalyst.funds.security.UserPrinciple;
 
 @RestController
 public class HelloController {
@@ -51,23 +53,35 @@ private PaymentRepositry payVar;
 		
 	}
 	
+	@GetMapping("/getrole")
+	public String getrole()
+	{
+		UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return principal.getRole();
+	}
+	
 	@GetMapping("/teaminfo")
 	public List<Teams> info() {
-		Iterable<TeamsEntity> team = teamVar.findAll();
+		UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(principal.getRole()+" "+principal.getUsername());
+		Iterable<TeamsEntity> team;
+		if(principal.getRole().equalsIgnoreCase("admin")) 
+		{
+			team = teamVar.findAll();	
+		}
+		else
+			team = teamVar.findByUserEntities_UserName(principal.getUsername());
 		System.out.println(team);
 		List<Teams> teamlist = new ArrayList<>();
 		
 		for (TeamsEntity teamEntity : team) {
 			Teams t = new Teams();
+			
+			
 			t.setTeamId(teamEntity.getTeamId());
 			t.setTeamName(teamEntity.getTeamName());
 			t.setFundGoal(teamEntity.getFundGoal());
 			t.setCycle(teamEntity.getCycle());
-//			List<User> users = new ArrayList<>();
-//			t.setUsers(users );
-//			User user = new User();
-//			users.add(user );
-//			user.setUserName("anudip");
 			
 			teamlist.add(t);
 		}

@@ -9,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+
+
 @Entity // This tells Hibernate to make a table out of this class
 public class UserEntity {
 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer userId;
@@ -22,7 +25,20 @@ public class UserEntity {
 	
 	private Long phoneNo;
 	
+	private String password;
 	
+	private String role;
+	
+	
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@ManyToMany(mappedBy = "userEntities")
 	private Set<TeamsEntity> teamEntities;
 	
@@ -76,6 +92,14 @@ public Integer getUserId() {
 
 	public void setTeamEntities(Set<TeamsEntity> teamEntities) {
 		this.teamEntities = teamEntities;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 

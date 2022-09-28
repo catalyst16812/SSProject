@@ -9,11 +9,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.catalyst.funds.User;
+import com.catalyst.funds.entity.UserEntity;
+
 //@Component
 public class UserPrinciple implements UserDetails {
 
-	private UserAuth user;
-	public UserPrinciple(UserAuth user) {
+	private UserEntity user;
+	public UserPrinciple(UserEntity user) {
 		super();
 		this.user = user;
 	}
@@ -33,7 +36,11 @@ public class UserPrinciple implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return user.getUsername();
+		return user.getUserName();
+	}
+	
+	public String getRole() {
+		return user.getRole();
 	}
 
 	@Override
