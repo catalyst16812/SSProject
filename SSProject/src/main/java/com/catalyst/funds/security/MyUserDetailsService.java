@@ -22,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		
 		UserEntity user = repo.findByUserName(username);
 		if(user==null)
-			throw new UsernameNotFoundException("User 404");
+			throw new UsernameNotFoundException("User 404 not found");
 		//return	User.withUsername(user.getUsername()).password(user.getPassword()).build();
 			
 		return new UserPrinciple(user);

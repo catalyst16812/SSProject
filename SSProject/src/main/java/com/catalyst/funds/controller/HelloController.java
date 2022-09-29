@@ -22,6 +22,7 @@ import com.catalyst.funds.entity.PaymentEntity;
 import com.catalyst.funds.repositry.PaymentRepositry;
 import com.catalyst.funds.repositry.TeamsRepositry;
 import com.catalyst.funds.repositry.UserRepositry;
+import com.catalyst.funds.repositry.UserService;
 import com.catalyst.funds.security.UserPrinciple;
 
 @RestController
@@ -32,6 +33,8 @@ private UserRepositry userVar;
 private TeamsRepositry teamVar;
 @Autowired
 private PaymentRepositry payVar;
+@Autowired
+private UserService userService;
 
 
 	@GetMapping("/userinfo")
@@ -53,23 +56,23 @@ private PaymentRepositry payVar;
 		
 	}
 	
-	@GetMapping("/getrole")
-	public String getrole()
-	{
-		UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return principal.getRole();
-	}
+//	@GetMapping("/getrole")
+//	public String getrole()
+//	{
+//		UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		return principal.getRole();
+//	}
 	
 	@GetMapping("/teaminfo")
 	public List<Teams> info() {
 		UserPrinciple principal = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println(principal.getRole()+" "+principal.getUsername());
 		Iterable<TeamsEntity> team;
-		if(principal.getRole().equalsIgnoreCase("admin")) 
-		{
-			team = teamVar.findAll();	
-		}
-		else
+//		if(principal.getRole().equalsIgnoreCase("admin")) 
+//		{
+//			team = teamVar.findAll();	
+//		}
+//		else
 			team = teamVar.findByUserEntities_UserName(principal.getUsername());
 		System.out.println(team);
 		List<Teams> teamlist = new ArrayList<>();
@@ -92,13 +95,13 @@ private PaymentRepositry payVar;
 	@PostMapping (path="/userdata")
 	public User alt(@RequestBody User U) {
 		System.out.println(U);
-		UserEntity entity = new UserEntity();
-		//entity.setUserId(U.getUserId());
-		entity.setUserName(U.getUserName());
-		entity.setEmail(U.getEmail());
-		entity.setPhoneNo(U.getPhoneNo());
+//		UserEntity entity = new UserEntity();
+//		//entity.setUserId(U.getUserId());
+//		entity.setUserName(U.getUserName());
+//		entity.setEmail(U.getEmail());
+//		entity.setPhoneNo(U.getPhoneNo());
 
-		userVar.save(entity);
+		userService.saveUser(U);
 		return U;
 	}
 	@PostMapping (path="/teamsdata")

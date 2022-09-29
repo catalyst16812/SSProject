@@ -1,13 +1,10 @@
 package com.catalyst.funds.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
 
@@ -18,7 +15,7 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer userId;
-
+	@Column(nullable = false, unique = true)
 	private String userName;
 
 	private String email;
@@ -27,16 +24,32 @@ public class UserEntity {
 	
 	private String password;
 	
-	private String role;
+//	private String role;
+//	
+//	
+//	
+//	public String getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(String role) {
+//		this.role = role;
+//	}
 	
-	
-	
-	public String getRole() {
-		return role;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "userId") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
+    )
+    private List<RoleEntity> roles = new ArrayList<>();
+
+	public List<RoleEntity> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
 	}
 
 	@ManyToMany(mappedBy = "userEntities")

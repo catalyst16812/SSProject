@@ -2,6 +2,7 @@ package com.catalyst.funds.security;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.catalyst.funds.User;
+import com.catalyst.funds.entity.RoleEntity;
 import com.catalyst.funds.entity.UserEntity;
 
 //@Component
@@ -39,8 +41,8 @@ public class UserPrinciple implements UserDetails {
 		return user.getUserName();
 	}
 	
-	public String getRole() {
-		return user.getRole();
+	public List<RoleEntity> getRole() {
+		return user.getRoles();
 	}
 
 	@Override
