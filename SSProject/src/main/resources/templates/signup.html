@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/indexstyle.css" />
+    <script>
+      function userhandle()
+{   
+        var password = document.getElementById  ("password").value;  
+        var password2 = document.getElementById  ("password2").value;  
+
+        if(password==password2)
+        {
+
+            var phone = document.getElementById  ("phone").value;  
+            var email = document.getElementById  ("email").value;  
+            var username = document.getElementById  ("username").value;  
+            var data = new Object();
+            data.userName - username;
+            data.phoneNo = phone;
+            data.email = email;
+            data.password = password;
+            var json = JSON.stringify(data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+              
+           console.log("hello2");
+         const myObj = JSON.parse(this.responseText);
+    
+         document.getElementById("error").innerHTML = myObj;
+       }
+       
+         }
+         xmlhttp.open("POST", "/signupuser", true);
+       xmlhttp.setRequestHeader("Content-type", "application/json");
+       xmlhttp.send(json);
+        
+      
+      
+      
+      }   
+        else
+        {
+           let text = "Password do not match "    
+            document.getElementById("error").innerHTML = text;
+        }
+}
+    </script>    
+
+
+
+    <!-- <script type="text/javascript" href="${pageContext.request.contextPath}/resources/static/js/userdatabase.js"></script> -->
+  </head>
+  <body>
+    <div class="signup-box">
+      <h1>Sign Up</h1>
+      <h4>It's free and only takes a minute</h4>
+      <div id="error">
+
+      </div>
+      <form>
+        <label>Username</label>
+        <input id="username" type="text" placeholder="" required/>
+        <label>Phone</label>
+        <input id="phone" type="text" placeholder="" required/>
+        <label>Email</label>
+        <input id="email" type="email" placeholder="" required/>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="" required/>
+        <label>Confirm Password</label>
+        <input id="password2" type="password" placeholder="" required/>
+        <input type="button" value="Submit" onclick="userhandle()"/>
+      </form>
+      <p>
+        By clicking the Sign Up button,you agree to our <br />
+        <a href="#">Terms and Condition</a> and <a href="#">Policy Privacy</a>
+      </p>
+    </div>
+    <p class="para-2">
+      Already have an account? <a href="login.html">Login here</a>
+    </p>
+  </body>
+</html>

@@ -1,7 +1,31 @@
 
 <!DOCTYPE html>
 <html>
-    <script type="text/javascript" src="webpag.js"></script>  
+    <script type="text/javascript" src="webpage.js"></script>  
+
+    <script>
+function getRole(){
+      var xmlhttp = new XMLHttpRequest();
+      
+       xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+
+        console.log("delete button working ");
+          const role = this.responseText;
+        if(role == 'admin' || role == 'ADMIN'){
+             window.location.href="/admin";
+        }else{
+             //window.location.href="/admin";
+        }
+      }
+      }
+    xmlhttp.open("GET", "/getrole", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+    
+  };
+  getRole();
+    </script>
     <!-- JavaScript Bundle with Popper -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

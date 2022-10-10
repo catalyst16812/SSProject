@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,8 @@ private UserRepositry userVar;
 private TeamsRepositry teamVar;
 @Autowired
 private PaymentRepositry payVar;
+@Autowired
+private PasswordEncoder passVar;
 
 
 	@GetMapping("/userinfo")
@@ -97,10 +100,22 @@ private PaymentRepositry payVar;
 		entity.setUserName(U.getUserName());
 		entity.setEmail(U.getEmail());
 		entity.setPhoneNo(U.getPhoneNo());
-
+		entity.setPassword(passVar.encode(U.getPassword()));
 		userVar.save(entity);
 		return U;
 	}
+	   @PostMapping (path="/signupuser")
+	    public User alt2(@RequestBody User U) {
+	        System.out.println(U);
+	        UserEntity entity = new UserEntity();
+	        //entity.setUserId(U.getUserId());
+	        entity.setUserName(U.getUserName());
+	        entity.setEmail(U.getEmail());
+	        entity.setPhoneNo(U.getPhoneNo());
+	        entity.setPassword(passVar.encode(U.getPassword()));
+	        userVar.save(entity);
+	        return U;
+	    }
 	@PostMapping (path="/teamsdata")
 	public String alt(@RequestBody Teams T) {
 		System.out.println(T);
