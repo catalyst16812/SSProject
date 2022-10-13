@@ -25,11 +25,25 @@ function userhandle()
         }   
         else
         {
-           let text = "Password do not match "    
+           let text = "<font color='blue'> Password do not match </font>"    
             document.getElementById("error").innerHTML = text;
         }
 }
 
-// var phone = document.getElementById  ("phone");  
-// var email = document.getElementById  ("email");  
-// var username = document.getElementById  ("username");  
+
+
+function register()
+{
+  var phone = document.getElementById  ("phone").value;  
+  var email = document.getElementById  ("email").value;  
+  var userame = document.getElementById  ("username").value;  
+  var data = new Object();
+  data.userName - username;
+  data.phoneNo = phone;
+  data.email = email;
+  data.password = password;
+
+  var json = JSON.stringify(data);
+
+  
+}
