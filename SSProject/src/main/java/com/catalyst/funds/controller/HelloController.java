@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catalyst.funds.TeamWithUser;
+import com.catalyst.funds.TeamWithmultiUser;
 import com.catalyst.funds.Teams;
 import com.catalyst.funds.User;
 import com.catalyst.funds.entity.TeamsEntity;
@@ -124,13 +125,21 @@ private PasswordEncoder passVar;
 		tent.setTeamName(T.getTeamName());
 		tent.setFundGoal(T.getFundGoal());
 		tent.setCycle(T.getCycle());
-		
-		teamVar.save(tent);
-		return T.toString();
+		TeamsEntity checkteam = teamVar.findByTeamName(T.getTeamName());
+		if(null== checkteam)
+		{
+		    teamVar.save(tent);
+		    return T.toString();
+
+		}
+		else
+		{
+		    return "team already exists";
+		}
 	}
 	
 	
-	@PutMapping (path="/teamsdata")
+	@PutMapping (path="/teamdata")
 	public String update(@RequestBody TeamWithUser T) {
 		System.out.println(T);
 		TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamname());
@@ -142,6 +151,22 @@ private PasswordEncoder passVar;
 		return T.toString();
 		
     }
+	
+	   @PutMapping (path="/teamsdata")
+	    public String updatemulti(@RequestBody TeamWithmultiUser T) {
+	        System.out.println(T);
+	        TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamname());
+	            for(String user: T.getUsername())
+	            {
+	            UserEntity userOption = userVar.findByUserName(user);
+	            teamsOption.getUserEntities().add(userOption);
+	            }
+	            
+	        
+	        teamVar.save(teamsOption);
+	        return T.toString();
+	        
+	    }
 
 	@DeleteMapping(path="/teamsdata")
 	public String deleteUserFromTeam(@RequestBody TeamWithUser T)

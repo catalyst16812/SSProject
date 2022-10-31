@@ -34,8 +34,22 @@ public class WebController extends WebMvcConfigurerAdapter {
 	public String signup() {
 		return "signup.html";
 	}
-
-
+	@RequestMapping("/addteam")
+	public String addteam() {
+	    return "teamadd.html";
+	}
+	@RequestMapping("/addtoteam")
+	public String addtoteam() {
+	    return "addtoteam.html";
+	}
+    @RequestMapping("/admin")
+    public String admin() {
+        return "admin.html";
+    }
+    @RequestMapping("/modifyteam")
+    public String modifyteam() {
+        return "modifyteam.html";
+    }
 
 	}
 	

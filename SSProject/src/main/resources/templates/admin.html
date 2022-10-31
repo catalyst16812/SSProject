@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+<title>Admin Panel</title>
+<style>
+
+body {
+background: white;
+font-family: "Roboto", sans-serif;
+color: black;
+padding: 40px;
+padding-top: 20px;
+}
+tab{
+    padding-left: 1em;
+}
+
+#option1 {
+font-size: large;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 40px;
+
+}
+#option2 {
+font-size: large;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 40px;
+
+}
+
+input[type="button"] {
+height: 30px;
+width: 250px;
+font-size: 18px;
+border: none;
+border-radius: 3px;
+position:fixed;
+left: 20%;
+background-color: #078531;
+color: white;
+text-align: center;
+cursor: pointer;
+  
+}
+</style>
+</head>
+<body>
+    <h1> Welcome to Admin Panel</h1>
+    <hr>
+    <div id = "option1">
+        <h2>Teams Management</h2>
+        Modify Teams <a href="modifyteam"><input type="button" value="Modify Teams" onclick=""/></a>
+        <br>Create new Team <a href="addteam"><input type="button" value="Create Team" onclick=""/></a>
+    
+        <br>Add User to Team <a href="addtoteam"><input type="button" value="Add User" onclick=""/></a>
+        <br>Delete User from team <input type="button" value="Remove user" onclick=""/>
+
+        <br><br><hr>
+    </div>
+    <div id ="option2">
+        <h2>User Management</h2>
+        Show existing Users<input type="button" value="Show Users" onclick=""/>
+        <br>Delete user from database<input  type="button" value="Delete user" onclick=""/>
+       
+
+    </div>
+    
+    
+<br><br><hr>
+
+    
+</body>
+</html>

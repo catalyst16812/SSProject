@@ -3,9 +3,105 @@
 <html lang="en">
 <head>
 <title>Add Teams</title>
+<style>
+    body {
+  background-color: #344a72;
+  font-family: "Roboto", sans-serif;
+}
+
+.team-add {
+  width: 360px;
+  height: 400px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+  padding-top: 15px;
+}
+
+h4 {
+  text-align: center;
+}
+
+form {
+  width: 300px;
+  margin-left: 20px;
+}
+
+form label {
+  display: flex;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+form input {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border: 1px solid gray;
+  border-radius: 6px;
+  outline: none;
+}
+input[type="button"] {
+  width: 320px;
+  height: 35px;
+  margin-top: 20px;
+  border: none;
+  background-color: #49c1a2;
+  color: white;
+  font-size: 18px;
+}
+p {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 15px;
+}
+.para-2 {
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  margin-top: -10px;
+}
+.para-2 a {
+  color: #49c1a2;
+}
+  </style>
+<script>
+    function teamadd()
+    {
+            var teamName = document.getElementById  ("teamname").value;  
+            var cycle = document.getElementById  ("cycle").value;  
+            var fundGoal = document.getElementById  ("fundgoal").value;  
+            var data = new Object();
+            data.teamName = teamName;
+            data.cycle = cycle;
+            data.fundGoal = fundGoal;
+            var json = JSON.stringify(data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                if(this.responseText == "team already exists")
+                    alert(this.responseText);
+                else
+                    alert("Success");
+           console.log("hello2");
+         //const myObj = JSON.parse(this.responseText);
+                
+        // document.getElementById("error").innerHTML = myObj;
+       }
+       
+         }
+         xmlhttp.open("POST", "/teamsdata", true);
+       xmlhttp.setRequestHeader("Content-type", "application/json");
+       xmlhttp.send(json);
+        }
+</script>
 </head>
 <body>
-  <div class="signup-box">
+  <div class="team-add">
     <h1>Create Team</h1>
     <h4>fill the details for the team</h4>
     <div id="error">

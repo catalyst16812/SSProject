@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="team">
+
+    </div>
+    <script>
+        function loadteam() {
+   
+   console.log("workin1");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+
+   console.log("hello2");
+ const myObj = JSON.parse(this.responseText);
+
+
+ let text = "<style>";
+ text += "table, th, td,tr {";
+ text += "border: 1px solid black;";
+ text += "border-width: thin;";
+ text += "}";
+ text += "</style>";
+
+text += "<table border='1' width='500' height='200' border-width='thin'>";
+ for (let x in myObj) {
+   text += "<tr>";
+   text += "<td>" + myObj[x].teamName + "</td>";
+   text += "<td>" + myObj[x].fundGoal + "</td>";
+   text += "<td>" + myObj[x].cycle + "</td>";
+   text += "</td><td><button type='button' onclick='deleteteam("+myObj[x].teamId+")'>Delete</button></td></tr>";
+ }
+ text += "</table>"    
+ document.getElementById("team").innerHTML = text;
+}
+
+ }
+ xmlhttp.open("GET", "/teaminfo", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send();
+ };
+
+ loadteam();
+
+ function deleteteam( teamId) {
+   
+   console.log("workindelete");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+
+   console.log("delete button working "+teamId);
+ const myObj = JSON.parse(this.responseText);
+
+}
+
+ }
+ xmlhttp.open("DELETE", "/teamsdelete/"+teamId, true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send();
+ };
+    </script>
+</body>
+</html>

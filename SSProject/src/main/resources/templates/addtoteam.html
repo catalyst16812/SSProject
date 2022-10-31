@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+<title>Add to team</title>
+<style>
+    body {
+  background-color: #344a72;
+  font-family: "Roboto", sans-serif;
+}
+
+#usertab {
+  width: 50%;
+  height: 100%;
+  padding-top: 10px;
+  text-align: left;
+  margin: auto;
+  border-radius: 4px;
+  background-color: rgb(198, 224, 216);
+  align-self: center;
+}
+#teamlist {
+  width: 50%;
+  height: 35px;
+  padding-top: 10px;
+  text-align: center;
+  margin:  auto;
+  border-radius: 4px;
+  color: #0a0a0a;
+  font-family: 'Segoe UI';
+  background-color: rgb(255, 254, 255);
+  
+}
+input[type="button"] {
+    height: 30px;  
+  width: 80px;  
+  font-size: 18px;
+  border: none;
+  
+  background-color: #49c1a2;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  
+}
+</style>
+<script>
+function addtoteam()
+{
+var data = "";
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log(this.responseText);
+   var responsedata = JSON.parse(this.responseText);
+   for(var i in responsedata)
+   {
+    console.log(responsedata[i]);
+    console.log(responsedata[i].teamName);
+     document.getElementById("op1").add(new Option(responsedata[i].teamName,responsedata[i].teamId));
+   }
+ 
+
+  }
+});
+
+xhr.open("GET", "/teaminfo");
+xhr.setRequestHeader("Content-type", "application/json");
+
+xhr.send(data);
+}
+addtoteam();
+// -------------------------------------
+
+
+function loaduser() {
+   
+   console.log("workin1");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+   console.log("hello2");
+ const myObj = JSON.parse(this.responseText);
+
+
+ let text = "<style>";
+ text += "table, th, td,tr {";
+ text += "border: 0px ;margin-left:auto;margin-right:auto;";
+ text += "border-width: thin;";
+ text += "}";
+ text += "</style>";
+
+text += "<table border='1' width='300' height='100' border-width='thin'>";
+ for (let x in myObj) {
+   text += "<td>" + myObj[x].userName + "</td><td><input type='checkbox' id="+myObj[x].userId+"></td></tr>";
+
+ }
+ text += "</table>"    
+ document.getElementById("usertab").innerHTML = text;
+}
+
+ }
+ xmlhttp.open("GET", "/userinfo", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send();
+ };
+ loaduser();
+
+</script>
+</head>
+<body>
+    <div id ="teamlist">Select your Team
+      <select class="form-control" id="op1">
+        <option selected="selected">Select</option>
+       </select>
+<br><br><hr>
+    </div>
+
+    <div id = "usertab">
+
+    </div>
+    <input type="button" value="Submit" onclick=""/>
+</body>
+</html>
