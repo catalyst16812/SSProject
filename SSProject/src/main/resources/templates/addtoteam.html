@@ -7,11 +7,18 @@
   font-family: "Roboto", sans-serif;
 }
 
+#table1 {
+
+  background: #49c1a2;
+  align-self: center;
+  
+}
+
 #usertab {
   width: 50%;
   height: 100%;
   padding-top: 10px;
-  text-align: left;
+  text-align: center;
   margin: auto;
   border-radius: 4px;
   background-color: rgb(198, 224, 216);
@@ -46,6 +53,8 @@ input[type="button"] {
 }
 </style>
 <script>
+
+
 function addtoteam()
 {
 var data = "";
@@ -61,7 +70,7 @@ xhr.addEventListener("readystatechange", function() {
    {
     console.log(responsedata[i]);
     console.log(responsedata[i].teamName);
-     document.getElementById("op1").add(new Option(responsedata[i].teamName,responsedata[i].teamId));
+     document.getElementById("op1").add(new Option(responsedata[i].teamName,responsedata[i].teamName));
    }
  
 
@@ -87,20 +96,14 @@ function loaduser() {
  const myObj = JSON.parse(this.responseText);
 
 
- let text = "<style>";
- text += "table, th, td,tr {";
- text += "border: 0px ;margin-left:auto;margin-right:auto;";
- text += "border-width: thin;";
- text += "}";
- text += "</style>";
+ let text = "";
 
-text += "<table border='1' width='300' height='100' border-width='thin'>";
+
  for (let x in myObj) {
-   text += "<td>" + myObj[x].userName + "</td><td><input type='checkbox' id="+myObj[x].userId+"></td></tr>";
+   text += "<td>" + myObj[x].userName + "</td><td><input type='checkbox' name = 'check' id="+myObj[x].userName+"></td></tr>";
 
- }
- text += "</table>"    
- document.getElementById("usertab").innerHTML = text;
+ }  
+ document.getElementById("table1").innerHTML = text;
 }
 
  }
@@ -110,6 +113,30 @@ xmlhttp.send();
  };
  loaduser();
 
+//------------------------------------------------------------
+
+function buttonaction(){
+var allcheck = document.getElementsByName("check");
+var username  =[] ;
+for(let x in allcheck){
+  if(allcheck[x].checked)
+  username.push(allcheck[x].id);
+}
+var data = new Object();
+data.teamName = document.getElementById("op1").value;
+data.userName = username;
+var json = JSON.stringify(data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                    alert("Success");
+       }
+       
+         }
+         xmlhttp.open("PUT", "/teamsdata", true);
+       xmlhttp.setRequestHeader("Content-type", "application/json");
+       xmlhttp.send(json);
+        }
 </script>
 </head>
 <body>
@@ -121,8 +148,10 @@ xmlhttp.send();
     </div>
 
     <div id = "usertab">
-
+    <table id = table1 border='1' width='300' height='100' border-width='thin'>
+      
+    </table>
     </div>
-    <input type="button" value="Submit" onclick=""/>
+    <input type="button" value="Submit" onclick="buttonaction()"/>
 </body>
 </html>

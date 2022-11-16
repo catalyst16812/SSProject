@@ -155,14 +155,15 @@ private PasswordEncoder passVar;
 	   @PutMapping (path="/teamsdata")
 	    public String updatemulti(@RequestBody TeamWithmultiUser T) {
 	        System.out.println(T);
-	        TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamname());
-	            for(String user: T.getUsername())
+	        TeamsEntity teamsOption = teamVar.findByTeamName(T.getTeamName());
+	            for(String user: T.getUserName())
 	            {
 	            UserEntity userOption = userVar.findByUserName(user);
 	            teamsOption.getUserEntities().add(userOption);
 	            }
 	            
-	        
+	        System.out.println(teamsOption);
+	        System.out.println(teamsOption.getUserEntities());
 	        teamVar.save(teamsOption);
 	        return T.toString();
 	        
