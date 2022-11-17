@@ -2,6 +2,7 @@ package com.catalyst.funds.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,13 +19,13 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer userId;
-
+	@Column(nullable = false, unique = true, length = 45)
 	private String userName;
-
+	@Column(nullable = false, length = 45)
 	private String email;
-	
+	@Column(nullable = false, length = 10)
 	private Long phoneNo;
-	
+	@Column(nullable = false, length = 64)
 	private String password;
 	
 	private String role;
@@ -104,3 +105,5 @@ public Integer getUserId() {
 
 
 }
+
+//same

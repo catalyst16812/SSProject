@@ -24,7 +24,8 @@ public class UserPrinciple implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return Collections.singleton(new SimpleGrantedAuthority("USER"));
+		//return Collections.singleton(new SimpleGrantedAuthority("USER"));
+	    return null;
 	}
 
 	@Override
@@ -68,3 +69,4 @@ public class UserPrinciple implements UserDetails {
 	}
 
 }
+//same
